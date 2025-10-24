@@ -1,0 +1,88 @@
+package vehicle_service;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
+public abstract class Booking implements Comparable<Booking>, Serializable {
+    //Id Generation
+	private static final AtomicInteger ID_COUNTER = new AtomicInteger(1000);
+    private int bookingId;
+    private String customerName;
+    private String vehicleName;
+    private ServiceType serviceType;
+    private Date serviceDate;
+
+    // Default constructor for serialization
+    public Booking() {}
+
+    public Booking(String customerName, String vehicleName, ServiceType serviceType, Date serviceDate) {
+        this.bookingId = ID_COUNTER.getAndIncrement();
+        this.customerName = customerName;
+        this.vehicleName = vehicleName;
+        this.serviceType = serviceType;
+        this.serviceDate = serviceDate;
+    }
+
+    // Getters
+    public int getBookingId() { return bookingId; }
+    public String getCustomerName() { return customerName; }
+    public String getVehicleName() { return vehicleName; }
+    public ServiceType getServiceType() { return serviceType; }
+    public Date getServiceDate() { return serviceDate; }
+
+    // Setter for loading from file, where ID must be preserved
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+        // Ensure ID counter is updated to be greater than any loaded ID
+        if (bookingId >= ID_COUNTER.get()) {
+            ID_COUNTER.set(bookingId + 1);
+        }
+    }
+
+    // Abstract method
+    public abstract String getServiceDetails();
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return String.format("ID: %d | Customer: %s | Vehicle: %s | Service: %s | Date: %s",
+                bookingId, customerName, vehicleName, serviceType, sdf.format(serviceDate));
+    }
+
+    @Override
+    public int compareTo(Booking other) {
+        return Integer.compare(this.bookingId, other.bookingId);
+    }
+
+
+}
+/*
+ * 
+ * Create a console- based java program to manage vehicle service booking in a garage.it should include */
+/* -Booking id (auto-generated) */)
+/* -Customer name */
+/* -Vehicle name
+ * -Service type (enum : Regular, Repair , Cleaning)*/
+/* -service date (java.util.date)*/
+/*
+---class and interface structure---
+/* 1. Booking (abstract class) 
+ * - -addBooking (Booking b) , removeBooking (int d),list Bookings()
+ * --default method :displayBookingSummary()-displays total bookings and count by service type
+ * 
+ /*----Program should demonstrate:---*/
+//1. Adding new bookings: add new bookings with input validation ; throw InvalidBooking Exception for invalid data
+/* 2. Removing bookings by booking id;throw BookingNotFoundException if id not found
+ * 3. Listing all bookings sorted by service date uasing Collections.sort
+ * 4. Displaying booking summary using default method
+ * 5.File Handling: save bookings to a file and load from a file using BufferedWriter and BufferedReader.
+ * 
+ * 
+ * --use arraylist<Booking> to store bookings
+ * --use java.text.SimpleDateFormat for Date input and display
+ * --Handle exceptions appropriately and display appropriate messages to the user
+ *
+ */
+ */

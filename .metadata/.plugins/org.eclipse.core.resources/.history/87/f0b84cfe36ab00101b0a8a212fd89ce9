@@ -1,0 +1,125 @@
+package vehicle_service;
+
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import exceptions.BookingNotFoundException;
+import exceptions.InvalidBookingException;
+import vehicle_service.Booking;
+import vehicle_service.GarageService;
+
+
+public class GarageManager implements GarageService {
+    private List<Booking> bookings; 
+    private static final String FILE_NAME = "bookings.txt";
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+    public GarageManager() {
+        this.bookings = new ArrayList<>();
+        loadBookingsFromFile();
+    }
+
+    
+    private void validateBooking(Booking b) throws InvalidBookingException {
+        if (b.getCustomerName() == null || b.getCustomerName().trim().isEmpty()) {
+            throw new InvalidBookingException("Customer name cannot be empty.");
+        }
+        if (b.getVehicleName() == null || b.getVehicleName().trim().isEmpty()) {
+            throw new InvalidBookingException("Vehicle name cannot be empty.");
+        }
+        
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+
+        if (b.getServiceDate() == null || b.getServiceDate().before(today.getTime())) {
+            throw new InvalidBookingException("Service date must be today or in the future.");
+        }
+    }
+
+    @Override
+    public void addBooking(Booking b) throws InvalidBookingException {
+        validateBooking(b);
+        bookings.add(b);
+        System.out.println("Booking created successfully! ID: " + b.getBookingId());
+        saveBookingsToFile(); // Save 
+    }
+
+    @Override
+    public void removeBooking(int id) throws BookingNotFoundException {
+        boolean removed = bookings.removeIf(b -> b.getBookingId() == id);
+        if (!removed) {
+            throw new BookingNotFoundException("Booking with ID " + id + " not found.");
+        }
+        System.out.println("Booking ID " + id + " removed successfully.");
+        saveBookingsToFile(); // Save 
+    }
+
+    @Override
+    public List<Booking> listBookings() {
+        List<Booking> sortedBookings = new ArrayList<>(bookings);
+        Collections.sort(sortedBookings, Comparator.comparing(Booking::getServiceDate));
+        return sortedBookings;
+    }
+
+    
+    public void saveBookingsToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (Booking b : bookings) {
+                String line = String.format("%d|%s|%s|%s|%s",
+                        b.getBookingId(),
+                        b.getCustomerName(),
+                        b.getVehicleName(),
+                        b.getServiceType().name(),
+                        dateFormat.format(b.getServiceDate()));
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("\n Bookings saved to " + FILE_NAME);
+        } catch (IOException e) {
+            System.err.println(" Could not save bookings: " + e.getMessage());
+        }
+    }
+
+   
+    public void loadBookingsFromFile() {
+        File file = new File(FILE_NAME);
+        if (!file.exists()) {
+            System.out.println(" No previous booking data found.");
+            return;
+        }
+
+        bookings.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                try {
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 5) {
+                        int id = Integer.parseInt(parts[0]);
+                        String name = parts[1];
+                        String vehicle = parts[2];
+                        ServiceType type = ServiceType.valueOf(parts[3]);
+                        Date date = null;
+						try {
+							date = dateFormat.parse(parts[4]);
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+
+                        bookings.add(Booking.createFromLoad(id, name, vehicle, type, date));
+                    }
+                } catch ( IllegalArgumentException e) {
+                    System.err.println("Skipping  booking entry: " + line);
+                }
+            }
+            System.out.println("\n Bookings loaded successfully from " + FILE_NAME + ". Total: " + bookings.size());
+        } catch (IOException e) {
+            System.err.println(" Could not load bookings: " + e.getMessage());
+        }
+    }
+}

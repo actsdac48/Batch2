@@ -1,0 +1,43 @@
+package practice.java;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import practice.java.Book.Category;
+
+public class Book_service {
+	List<Book> collection=new ArrayList<>();
+	Scanner sc=new Scanner(System.in);
+	private int id;
+	enum Category{FICTION,NON_FICTION,EDUCATIONAL}
+	Category category;
+	LocalDate listingdate;
+	LocalDate stockupdatedate;
+	LocalDate lastselldate;
+	int stock;
+	String Author;
+	int price;
+	int discount;
+	
+	
+	public void add() {
+		System.out.println("Enter category");
+		String cat=sc.next();
+		System.out.println("Enter Stock");
+		int stock=sc.nextInt();
+		System.out.println("Enter Author");
+		String Author=sc.next();
+		System.out.println("Enter price");
+		int Price=sc.nextInt();
+		System.out.println("Enter Discount");
+		int discount=sc.nextInt();
+		System.out.println("Enter Stockupdatedate(yyyy-mm-dd)");
+		String date=sc.next();
+		stockupdatedate=LocalDate.parse(date);
+		System.out.println("Enter Lastselldate(yyyy-mm-dd)");
+		String 
+	}
+
+}

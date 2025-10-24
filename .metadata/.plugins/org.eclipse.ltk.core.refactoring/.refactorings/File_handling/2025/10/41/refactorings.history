@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;SaveFile.java&apos; to &apos;Assignment9/src/day9&apos;&#x0D;&#x0A;- Original project: &apos;File_handling&apos;&#x0D;&#x0A;- Destination element: &apos;Assignment9/src/day9&apos;&#x0D;&#x0A;- Original element: &apos;file_handling.SaveFile.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=Assignment9/src&lt;day9" element1="/src&lt;file_handling{SaveFile.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1760094354597" units="1" version="1.0"/>
+</session>

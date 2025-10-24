@@ -1,0 +1,198 @@
+package day9;
+
+import consoleInput.GetInput;
+
+import linkedList.LinkedList;
+
+public class Entry {
+
+	public static void main(String[] args) {
+		
+		LinkedList<Employee> listEmp = new LinkedList<>();
+		
+		
+		
+		//Employee arrEmp[]=new Employee[10];
+		String name, address;
+		int age;
+		boolean gender;
+		float basicSalary, hra, overtime, commission;
+		
+		int count=0;
+		
+		int choice;
+		
+		
+		do {
+			System.out.println("Enter Your Choice ---->");
+			System.out.println("1.Add Employee");
+			System.out.println("2.Display All");
+			System.out.println("3.Save");
+			System.out.println("4.Load");
+			System.out.println("5.Sort");
+			System.out.println("6.Exit");
+			
+			choice=GetInput.getInt();
+			
+			switch(choice) {
+			case 1:{
+				int option;
+				do {
+				System.out.println("1.Manager");
+				System.out.println("2.Engineer");
+				System.out.println("3.SalesPerson");
+				System.out.println("4.Exit");
+				
+				option=GetInput.getInt();
+				
+				
+				
+				
+				switch(option) {
+				case 1: {
+					System.out.println("Enter Name");
+					name=GetInput.getString();
+					System.out.println("Enter Address");
+					address=GetInput.getString();
+					System.out.println("Enter Age");
+					age=GetInput.getInt();
+					System.out.println("Enter Gender: True for Male and False for Female");
+					gender=GetInput.getBoolean();
+					System.out.println("Enter Basic Salary");
+					basicSalary=GetInput.getFloat();
+					System.out.println("Enter HRA");
+					hra=GetInput.getFloat();
+					Employee emp= new Manager(name, address, age, gender, basicSalary, hra);
+					listEmp.add(emp);
+					break;
+				}
+				case 2:{
+					System.out.println("Enter Name");
+					name=GetInput.getString();
+					System.out.println("Enter Address");
+					address=GetInput.getString();
+					System.out.println("Enter Age");
+					age=GetInput.getInt();
+					System.out.println("Enter Gender: True for Male and False for Female");
+					gender=GetInput.getBoolean();
+					System.out.println("Enter Basic Salary");
+					basicSalary=GetInput.getFloat();
+					System.out.println("Enter Overtime");
+					overtime=GetInput.getFloat();
+					Employee emp= new Engineer(name, address, age, gender, basicSalary, overtime);
+					listEmp.add(emp);
+					break;
+				}
+				case 3:{
+					System.out.println("Enter Name");
+					name=GetInput.getString();
+					System.out.println("Enter Address");
+					address=GetInput.getString();
+					System.out.println("Enter Age");
+					age=GetInput.getInt();
+					System.out.println("Enter Gender: True for Male and False for Female");
+					gender=GetInput.getBoolean();
+					System.out.println("Enter Basic Salary");
+					basicSalary=GetInput.getFloat();
+					System.out.println("Enter Commission");
+					commission=GetInput.getFloat();
+					Employee emp= new SalesPerson(name, address, age, gender, basicSalary, commission);
+					listEmp.add(emp);
+					break;
+				}
+				default: break;
+				}
+				}while(option!=4);
+				break;
+			}
+				
+			case 2:{
+				
+				Employee data = (Employee) listEmp.getFirst();
+				
+				while( data!= null ) {
+					System.out.println(data.toString());
+					data = (Employee) listEmp.getNext();
+				}
+			}
+				
+			case 3:{
+				 Employee data  = (Employee) listEmp.getFirst();
+				 
+				 while(data != null) {
+					 
+				 }
+			}
+			break;
+				
+			case 4: break;
+				
+			case 5:{
+				int option;
+				do {
+				System.out.println("1.By Name");
+				System.out.println("2.By Designation");
+				System.out.println("3.Exit");
+				
+				option=GetInput.getInt();
+				
+				
+				switch(option) {
+				case 1: {
+					int arrCount=0;
+					Employee data = (Employee) listEmp.getFirst();
+					
+					String[] arrEmp = new String[100];
+					
+					while( data!= null ) {
+						arrEmp[arrCount++]=data.toString();
+						data = (Employee) listEmp.getNext();
+					}
+					
+					
+					for(int i=0; i<arrCount; i++) {
+						System.out.println(arrEmp[i]);
+					}
+					break;
+				}
+				case 2:{
+					
+					Employee data = (Employee) listEmp.getFirst();
+					
+					int ch;
+					System.out.println("1. Manager   2.Engineer   3.SalesPerson");
+					ch=GetInput.getInt();
+					while( data!= null ) {
+					if(ch==1) {
+						if(data instanceof Manager) {
+							System.out.println(data.toString());
+						}
+					} 
+					if(ch==2) {
+						if(data instanceof Engineer) {
+							System.out.println(data.toString());
+						}
+					}
+					if(ch==3) {
+						if(data instanceof SalesPerson) {
+							System.out.println(data.toString());
+						}
+					}
+					data = (Employee) listEmp.getNext();
+					}
+					break;
+				}
+				default: break;
+				}
+				}while(option!=3);
+				break;
+				
+			}
+				
+			default:
+			}
+		}while(choice!=6);
+
+	}
+
+}

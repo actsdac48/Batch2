@@ -1,0 +1,14 @@
+package vehicle_service;
+import java.util.Date;
+
+public class VehicleServiceBooking extends Booking {
+
+    public VehicleServiceBooking(String customerName, String vehicleName, ServiceType serviceType, Date serviceDate) {
+        super(customerName, vehicleName, serviceType, serviceDate);
+    }
+
+    @Override
+    public String getServiceDetails() {
+        return "Service for " + getVehicleName() + " is " + getServiceType() + " on " + getServiceDate();
+    }
+}

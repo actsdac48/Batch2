@@ -1,0 +1,61 @@
+package practice.java;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class GadgetService1 {
+	// functions to be made
+	// 1.add,2.updatestock,3.add 25% discount,4.remove oneyear oldgadget
+	Scanner sc=new Scanner(System.in);
+
+	List<Gadget1> collection = new ArrayList<>();
+
+	public void addGadget(Gadget1 g) {
+		collection.add(g);
+	}
+    
+	public void updatestock() {
+		System.out.println("Enter Gadget Name");
+		String gad=sc.next();
+		List<Gadget1> temp=new ArrayList<>();
+		
+		for(Gadget1 g:collection) {
+			if(g.getCategory().name().equals(gad))
+				temp.add(g);
+			
+		}   
+		for(Gadget1 display:temp) {
+			System.out.println(display);
+		}
+		System.out.println("enter id for stock updation");
+		int id=sc.nextInt();
+		for(Gadget1 idd:temp) {
+			if(idd.getId()==id) {
+				System.out.println("enter stock");
+				int newstock=sc.nextInt();
+				idd.setStock(newstock);
+			}
+		}
+		System.out.println("Invalid ID");
+	}
+	
+	public void addDiscountbefore6() {
+		for(Gadget1 g:collection) {
+			if(g.getLastSellDate().isBefore(LocalDate.now().minusMonths(6))) 
+				g.setDiscount(25);
+		}
+		System.out.println("No Products");
+		
+	}
+	
+	public void removegadgetbefore() {
+		for(Gadget1 g:collection) {
+			if((g.getListingdate().isBefore(LocalDate.now().minusYears(1))) && g.getLastSellDate()==null)
+				collection.remove(g);
+			
+		}
+	}
+}
+

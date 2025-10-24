@@ -1,0 +1,7 @@
+package vehicle_service;
+
+public class InvalidBookingException {
+	public InvalidBookingException(String message) {
+        super(message);
+    }
+}

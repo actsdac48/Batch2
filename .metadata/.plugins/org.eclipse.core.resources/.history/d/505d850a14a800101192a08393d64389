@@ -1,0 +1,50 @@
+package day9;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import day9.JavaApp;
+import day9.JavaApp.Field;
+import day9.JavaApp.Method;
+
+public class Entry {
+	 public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        System.out.print("Enter package name: ");
+	        String packageName = scanner.nextLine().trim();
+
+	        System.out.print("Enter class name: ");
+	        String className = scanner.nextLine().trim();
+
+	        String classAccessSpecifier = JavaApp.getAccessSpecifier(scanner);
+
+	        List<Field> fields = new ArrayList<>();
+	        List<Method> methods = new ArrayList<>();
+
+	        while (true) {
+	            System.out.println("\nMenu:");
+	            System.out.println("1. Add field");
+	            System.out.println("2. Add method");
+	            System.out.println("3. Generate class");
+	            System.out.print("Enter choice: ");
+
+	            String choice = scanner.nextLine().trim();
+	            switch (choice) {
+	                case "1":
+	                	JavaApp.addField(scanner, fields);
+	                    break;
+	                case "2":
+	                	JavaApp.addMethod(scanner, methods);
+	                    break;
+	                case "3":
+	                	JavaApp.generateClassFile(packageName, classAccessSpecifier, className, fields, methods);
+	                    System.out.println("Class file " + className + ".java generated successfully.");
+	                    scanner.close();
+	                    return;
+	                default:
+	                    System.out.println("Invalid choice, try again.");
+	            }
+	        }
+	    }
+}

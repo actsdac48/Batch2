@@ -1,0 +1,33 @@
+package day9;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class JavaListProg {
+	
+	
+	public static void readFile(File ObjFile) {
+		
+			try(FileInputStream fileStream = new FileInputStream(ObjFile);){
+			
+			byte[] data = new byte[(int)ObjFile.length()];
+
+			fileStream.read(data);
+			
+			ArrayList<String> myList = new ArrayList<>();
+			
+
+		} catch (FileNotFoundException e) {
+			
+			System.out.println(e);
+		} catch (IOException e) {
+			
+			System.out.println(e);
+		}
+	}
+	
+	
+}

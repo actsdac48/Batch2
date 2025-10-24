@@ -1,0 +1,61 @@
+package vehicle_service;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
+/**
+ * Abstract class representing a vehicle service booking.
+ * Handles auto-generated Booking ID.
+ */
+public abstract class Booking {
+    // Static counter for auto-generating IDs (starting at 1000)
+    private static int nextId = 1000;
+    private int bookingId;
+    private String customerName;
+    private String vehicleName;
+    private ServiceType serviceType;
+    private Date serviceDate;
+
+    // Constructor for NEW bookings (increments ID)
+    public Booking(String customerName, String vehicleName, ServiceType serviceType, Date serviceDate) {
+        this.bookingId = nextId++;
+        this.customerName = customerName;
+        this.vehicleName = vehicleName;
+        this.serviceType = serviceType;
+        this.serviceDate = serviceDate;
+    }
+    
+    // Protected constructor for LOADING bookings from file (no ID increment)
+    protected Booking(int bookingId, String customerName, String vehicleName, ServiceType serviceType, Date serviceDate) {
+        this.bookingId = bookingId;
+        this.customerName = customerName;
+        this.vehicleName = vehicleName;
+        this.serviceType = serviceType;
+        this.serviceDate = serviceDate;
+        
+        // Ensure the static counter is updated to be greater than any loaded ID
+        if (bookingId >= nextId) {
+            nextId = bookingId + 1;
+        }
+    }
+
+    // Factory method for file loading
+    public static Booking createFromLoad(int id, String name, String vehicle, ServiceType type, Date date) {
+        // We must return a concrete type, so we use ConcreteBooking
+        return new VehicleServiceBooking(id, name, vehicle, type, date);
+    }
+
+    // Getters
+    public int getBookingId() { return bookingId; }
+    public String getCustomerName() { return customerName; }
+    public String getVehicleName() { return vehicleName; }
+    public ServiceType getServiceType() { return serviceType; }
+    public Date getServiceDate() { return serviceDate; }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return String.format("ID: %d | Customer: %s | Vehicle: %s | Service: %s | Date: %s",
+                bookingId, customerName, vehicleName, serviceType, sdf.format(serviceDate));
+    }
+}

@@ -1,0 +1,33 @@
+package vehicle_service;
+
+public abstract class Booking {
+
+}
+/*
+ * 
+ * Create a console- based java program to manage vehicle service booking in a garage.it should include */
+/* -Booking id (auto-generated) */)
+/* -Customer name */
+/* -Vehicle name
+ * -Service type (enum : Regular, Repair , Cleaning)*/
+/* -service date (java.util.date)*/
+/*
+---class and interface structure---
+/* 1. Booking (abstract class) 
+ * - -addBooking (Booking b) , removeBooking (int d),list Bookings()
+ * --default method :displayBookingSummary()-displays total bookings and count by service type
+ * 
+ /*----Program should demonstrate:---*/
+//1. Adding new bookings: add new bookings with input validation ; throw InvalidBooking Exception for invalid data
+/* 2. Removing bookings by booking id;throw BookingNotFoundException if id not found
+ * 3. Listing all bookings sorted by service date uasing Collections.sort
+ * 4. Displaying booking summary using default method
+ * 5.File Handling: save bookings to a file and load from a file using BufferedWriter and BufferedReader.
+ * 
+ * 
+ * --use arraylist<Booking> to store bookings
+ * --use java.text.SimpleDateFormat for Date input and display
+ * --Handle exceptions appropriately and display appropriate messages to the user
+ *
+ */
+ */

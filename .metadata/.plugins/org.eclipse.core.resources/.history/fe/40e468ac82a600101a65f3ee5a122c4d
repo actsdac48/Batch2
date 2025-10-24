@@ -1,0 +1,97 @@
+package practice.java;
+
+import java.time.LocalDate;
+
+public class Gadget {
+	private int id;
+
+	enum Category {
+		Laptop, Smartphone, Tablet
+	}
+
+	Category category;
+	LocalDate Listingdate;
+	int Stock;
+	LocalDate StockUpdateDate;
+	LocalDate lastselldate;
+	double Price;
+	int discount;
+
+	public Gadget(int id, Category category, LocalDate listingdate, int stock, LocalDate stockUpdateDate,
+			LocalDate lastselldate, double price, int discount) {
+		super();
+		this.id = id;
+		this.category = category;
+		Listingdate = listingdate;
+		Stock = stock;
+		StockUpdateDate = stockUpdateDate;
+		this.lastselldate = lastselldate;
+		Price = price;
+		this.discount = discount;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public LocalDate getListingdate() {
+		return Listingdate;
+	}
+
+	public void setListingdate(LocalDate listingdate) {
+		Listingdate = listingdate;
+	}
+
+	public int getStock() {
+		return Stock;
+	}
+
+	public void setStock(int stock) {
+		Stock = stock;
+	}
+
+	public LocalDate getStockUpdateDate() {
+		return StockUpdateDate;
+	}
+
+	public void setStockUpdateDate(LocalDate stockUpdateDate) {
+		StockUpdateDate = stockUpdateDate;
+	}
+
+	public LocalDate getLastselldate() {
+		return lastselldate;
+	}
+
+	public void setLastselldate(LocalDate lastselldate) {
+		this.lastselldate = lastselldate;
+	}
+
+	public double getPrice() {
+		return Price;
+	}
+
+	public void setPrice(double price) {
+		Price = price;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
+}

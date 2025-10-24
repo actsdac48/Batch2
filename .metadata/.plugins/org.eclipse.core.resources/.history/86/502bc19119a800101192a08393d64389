@@ -1,0 +1,33 @@
+package day9;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class JavaListProg {
+	
+	
+	public static void readFile() {
+try(FileInputStream fileStream = new FileInputStream(ObjFile);){
+			
+			byte[] data = new byte[(int)ObjFile.length()];
+
+			
+			fileStream.read(data);
+			
+			for(int i=0; i<data.length; i++) {
+				data[i]=(byte) (data[i]-21);
+			}
+
+			
+			System.out.println(new String(data));
+			
+		} catch (FileNotFoundException e) {
+			
+			System.out.println(e);
+		} catch (IOException e) {
+			
+			System.out.println(e);
+		}
+	}
+}

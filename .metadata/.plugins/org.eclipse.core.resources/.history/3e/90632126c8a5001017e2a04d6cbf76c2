@@ -1,0 +1,38 @@
+package file_handling;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class SaveFile {
+	
+	 public static void SaveObj(Object emp) {
+		 try {
+	          FileOutputStream fileOut = new FileOutputStream("EmpData.txt");
+	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	          out.writeObject(emp);
+	          out.close();
+	          fileOut.close();
+	          System.out.println("Serialized data is saved in EmpData.txt");
+	      } catch (IOException i) {
+	          i.printStackTrace();
+	      } 
+	 }
+	 
+	 public static void LoadObj(Object emp) {
+		 try {
+	            FileInputStream fileIn = new FileInputStream("employee.ser");
+	            ObjectInputStream in = new ObjectInputStream(fileIn);
+	            emp = (Employee) in.readObject();
+	            in.close();
+	            fileIn.close();
+	            System.out.println("Deserialized Employee...");
+	            // Use emp object as needed
+	        } catch (IOException | ClassNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	 }
+      
+	
+}
+

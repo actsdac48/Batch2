@@ -1,0 +1,33 @@
+package practice.java;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GadgetService1 {
+	// functions to be made
+	// 1.add,2.updatestock,3.add 25% discount,4.remove oneyear oldgadget
+
+	List<Gadget1> collection = new ArrayList<>();
+
+	public void addGadget(Gadget1 g) {
+		collection.add(g);
+	}
+    
+	public void updatestock(int id,int newstock) {
+		for(Gadget1 g:collection) {
+			if(g.getId()==id)
+				g.setStock(newstock);
+		}   
+		System.out.println("Invalid ID");
+	}
+	
+	public void addDiscountbefore6() {
+		for(Gadget1 g:collection) {
+			if(g.getLastSellDate().isBefore(LocalDate.now().minusMonths(6))) {
+				g.setDiscount(25);
+			}
+		}
+	}System.out.println("");
+}
+

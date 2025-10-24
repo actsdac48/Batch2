@@ -1,0 +1,16 @@
+package practice.java;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Gadget_Service {
+	
+	List<Gadget> collection=new ArrayList<>();
+	
+	
+	public void add(Gadget g) {
+		collection.add(g);
+		
+	}
+
+}

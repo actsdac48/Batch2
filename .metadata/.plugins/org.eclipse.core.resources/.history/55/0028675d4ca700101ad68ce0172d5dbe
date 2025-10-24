@@ -1,0 +1,47 @@
+package practice.java;
+
+import java.util.Scanner;
+
+public class Entry1 {
+
+	public static void main(String[] args) {
+		GadgetService1 use=new GadgetService1();
+		Gadget1 dis=new Gadget1();
+		Scanner sc=new Scanner(System.in);
+		int choice=0;
+		
+		do {
+			System.out.println("Enter Choice");
+		
+			System.out.println("________________________________________________________");
+			System.out.println("1.Add gadget");
+			System.out.println("2.Update Gadget");
+			System.out.println("3.Add 25% discount on products not sold in last 6 months");
+			System.out.println("4.Remove gadgets That were listed over year ago and have not been sold");
+			System.out.println("display all gadgets");
+			System.out.println("exit");
+			choice=sc.nextInt();
+			
+			switch(choice) {
+			case 1: 
+				use.addGadget();
+				break;
+				
+			case 2:use.updatestock();
+			break;
+			
+			case 3:use.addDiscountbefore6();
+			break;
+			
+			case 4:use.removegadgetbefore();
+			break;
+			case 5:System.out.println();
+		    default:
+			}
+			
+			
+		}while(choice!=6);
+
+	}
+
+}

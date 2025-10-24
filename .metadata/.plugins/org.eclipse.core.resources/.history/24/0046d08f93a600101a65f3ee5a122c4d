@@ -1,0 +1,46 @@
+package practice.java;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Gadget_Service {
+	
+	List<Gadget> collection=new ArrayList<>();
+	
+	
+	public void add(Gadget g) {
+		collection.add(g);
+		System.out.println("----------------Added Successfully---------------------");
+	}
+	public void update(int id, int stock) {
+		for(Gadget g : collection ) {
+			if(g.getId()== id)
+				g.setStock(stock);
+		}
+	}
+	
+	public void discount() {
+		for(Gadget g : collection) {
+			if(g.getLastselldate().isBefore(LocalDate.now().minusMonths(6))){
+				g.setDiscount(25);
+				System.out.println("----------------Discount Given----------------");
+			}
+		}
+	}
+	
+	public void remove() {
+		for(Gadget g : collection) {
+			if(g.getLastselldate().isBefore(LocalDate.now().minusYears(1)) ||  g.getLastselldate()==null){
+				collection.remove(g);
+				System.out.println("---------------Removed Gadget-------------------");
+			}
+		}
+	}
+
+	public void showAll() {
+		for(Gadget g : collection) {
+			System.out.println(g.toString());
+		}
+	}
+}

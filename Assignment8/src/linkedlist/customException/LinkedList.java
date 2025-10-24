@@ -1,0 +1,118 @@
+package linkedlist.customException;
+
+import java.util.Iterator;
+
+
+public class LinkedList<T> implements Iterable<T>{
+
+	Node<T> start;
+	Node<T> end;
+	Node<T> current;
+	int maxCount;
+	
+	
+	public void add(T data) throws UpdateException{
+		Node<T> temp= new Node<T>(data);
+		
+		if(data==null)
+			throw new UpdateException("Invalid Data");
+		
+		if(start == null ) {
+			start=end=current=temp;
+		}else {
+			end.next=temp;
+			temp.previous=end;
+			end=temp;
+		}
+		maxCount++;
+	}
+	
+	public void delete(int index) throws UpdateException {
+		if(start==null|| index> maxCount-1) {
+			throw new UpdateException("Unable to Update");
+		}
+		if(start==end) {
+			start=end=current=null;
+		}
+		else if(index==0) {
+			start=start.next;
+			start.previous=null;
+		}
+		else if(index==maxCount-1) {
+			end=end.previous;
+			end.next=null;
+		}
+		else {
+			Node<T> temp=start;
+			
+			for(int i=0; i<index;i++,temp=temp.next) {
+				temp.previous.next=temp.next;
+				temp.next.previous=temp.previous;
+			}
+			current=start;
+			maxCount--; 
+		}
+	}
+	
+	public T getFirst() throws TraverseException {
+		if(start==null)
+			throw new TraverseException("No Nodes");
+		current =start;
+		return current.data;
+	}
+	
+	public T getLast() throws TraverseException{
+		if(start==null)
+			throw new TraverseException("No Nodes");
+		current =end;
+		return current.data;
+	}
+	
+	public T getNext() throws TraverseException{
+		if(start==null||current.next==null)
+			throw new TraverseException("No Nodes");
+		current =current.next;
+		return current.data;
+	}
+	public T getPrevious() throws TraverseException{
+		if(start==null||current.previous==null)
+			throw new TraverseException("No Nodes");
+		current =current.previous;
+		return current.data;
+	}
+	
+	public int getMaxCount() {
+		return maxCount;
+	}
+	
+	@Override
+	public Iterator<T> iterator() {
+		return new listIterator<T>();
+	}
+	
+	class listIterator<T> implements Iterator<T>{
+		
+		int index;
+		
+		{
+			current=start;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return index< maxCount;
+		}
+
+		@Override
+		public T next() {
+			T data =(T)current.data;
+			
+			if(current.next!=null || start!=null) {
+				current=current.next;
+				index++;
+			}
+			
+			return data;
+		}
+}
+}

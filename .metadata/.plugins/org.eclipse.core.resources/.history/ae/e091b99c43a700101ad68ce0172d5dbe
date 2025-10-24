@@ -1,0 +1,91 @@
+package practice.java;
+
+import java.time.LocalDate;
+
+public class Gadget1 {
+	private int id;
+	enum Category{LAPTOP,MOBILE,TABLET}
+	Category category;
+	private String brand;
+	private LocalDate Listingdate;
+	private int Stock;
+	private LocalDate StockUpdateDate;
+	private LocalDate LastSellDate;
+	private int Price;
+	private int discount;
+	public Gadget1(int id, Category category,String Brand,  int stock, 
+			, int price, int discount) {
+		super();
+		this.id = id;
+		this.category = category;
+		this.brand=Brand;
+		Listingdate = LocalDate.now();
+		Stock = stock;
+		StockUpdateDate = LocalDate.now();
+		LastSellDate = lastSellDate;
+		Price = price;
+		this.discount = discount;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public LocalDate getListingdate() {
+		return Listingdate;
+	}
+	public void setListingdate(LocalDate listingdate) {
+		Listingdate = listingdate;
+	}
+	public int getStock() {
+		return Stock;
+	}
+	public void setStock(int stock) {
+		Stock = stock;
+	}
+	public LocalDate getStockUpdateDate() {
+		return StockUpdateDate;
+	}
+	public void setStockUpdateDate(LocalDate stockUpdateDate) {
+		StockUpdateDate = stockUpdateDate;
+	}
+	public LocalDate getLastSellDate() {
+		return LastSellDate;
+	}
+	public void setLastSellDate(LocalDate lastSellDate) {
+		LastSellDate = lastSellDate;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public void setPrice(int price) {
+		Price = price;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	@Override
+	public String toString() {
+		return "Gadget1 [id=" + id + ", category=" + category + ", Listingdate=" + Listingdate + ", Stock=" + Stock
+				+ ", StockUpdateDate=" + StockUpdateDate + ", LastSellDate=" + LastSellDate + ", Price=" + Price
+				+ ", discount=" + discount + "]";
+	}
+	
+
+}

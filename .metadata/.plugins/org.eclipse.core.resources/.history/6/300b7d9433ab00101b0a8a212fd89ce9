@@ -1,0 +1,58 @@
+package vehicle_service;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
+public abstract class Booking implements Comparable<Booking>, Serializable {
+    //Id Generation
+	private static final AtomicInteger ID_COUNTER = new AtomicInteger(1000);
+    private int bookingId;
+    private String customerName;
+    private String vehicleName;
+    private ServiceType serviceType;
+    private Date serviceDate;
+
+   
+    public Booking() {}
+    public Booking(String customerName, String vehicleName, ServiceType serviceType, Date serviceDate) {
+        this.bookingId = ID_COUNTER.getAndIncrement();
+        this.customerName = customerName;
+        this.vehicleName = vehicleName;
+        this.serviceType = serviceType;
+        this.serviceDate = serviceDate;
+    }
+
+    // Getters
+    public int getBookingId() { return bookingId; }
+    public String getCustomerName() { return customerName; }
+    public String getVehicleName() { return vehicleName; }
+    public ServiceType getServiceType() { return serviceType; }
+    public Date getServiceDate() { return serviceDate; }
+
+    // Setter 
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+        if (bookingId >= ID_COUNTER.get()) {
+            ID_COUNTER.set(bookingId + 1);
+        }
+    }
+
+    
+    public abstract String getServiceDetails();
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return String.format("ID: %d | Customer: %s | Vehicle: %s | Service: %s | Date: %s",
+                bookingId, customerName, vehicleName, serviceType, sdf.format(serviceDate));
+    }
+
+    @Override
+    public int compareTo(Booking other) {
+        return Integer.compare(this.bookingId, other.bookingId);
+    }
+
+
+}

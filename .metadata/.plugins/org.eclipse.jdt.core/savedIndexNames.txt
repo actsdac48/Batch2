@@ -1,0 +1,7 @@
+INDEX VERSION 1.134+C:\Users\dac\Desktop\BATCH2\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+1787956617.index
+334904983.index
+3916731244.index
+1495550483.index
+1509650326.index

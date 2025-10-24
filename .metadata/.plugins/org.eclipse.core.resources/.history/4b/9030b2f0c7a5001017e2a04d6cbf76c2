@@ -1,0 +1,21 @@
+package file_handling;
+
+
+public class SaveFile {
+	
+	 public static void SaveObj(Object emp) {
+		 try {
+	          FileOutputStream fileOut = new FileOutputStream("employee.ser");
+	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	          out.writeObject(emp);
+	          out.close();
+	          fileOut.close();
+	          System.out.println("Serialized data is saved in employee.ser");
+	      } catch (IOException i) {
+	          i.printStackTrace();
+	      } 
+	 }
+      
+	
+}
+
